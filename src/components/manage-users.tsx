@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import CreateUser from "./create-user.component";
+import CreateUser from "./create-user";
 
 interface User {
     _id: string;

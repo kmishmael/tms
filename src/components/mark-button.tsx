@@ -13,8 +13,8 @@ const MarkButton: React.FC<TicketProps> = ({ _id }) => {
   const [priority, setPriority] = useState('');
   const [status, setStatus] = useState('');
   const [type, setType] = useState('');
-  const [users, setUsers] = useState<string[]>([]);
-  const [projects, setProjects] = useState<string[]>([]);
+  const [, setUsers] = useState<string[]>([]);
+  const [, setProjects] = useState<string[]>([]);
 
   useEffect(() => {
     // Fetch ticket details
