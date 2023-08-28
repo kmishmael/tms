@@ -1,71 +1,25 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 
-const styles = {
-  i: {
-    marginRight: '5px',
-  },
-  td: {
-    maxWidth: '250px',
-  },
-  navbar: {
-    padding: '15px 10px',
-    background: '#fff',
-    marginBottom: '40px',
-    boxShadow: '1px 1px 3px rgba(0, 0, 0, 0.1)',
-  },
-  navLink: {
-    outline: 'none',
-  },
-  wrapper: {
-    display: 'flex',
-    width: '100%',
-    alignItems: 'stretch',
-  },
-  sidebar: {
-    boxShadow: '1px 0 3px rgba(0, 0, 0, .1)',
-  },
-  navLinkSidebar: {
-    color: '#aaa',
-    transition: '0.3s all',
-  },
-  activeNavLink: {
-    color: '#000',
-  },
-  hoverNavLink: {
-    color: '#000',
-  },
-  content: {
-    width: '100%',
-    padding: '20px',
-    minHeight: '100vh',
-  },
-  lowPriority: {
-    color: 'green',
-  },
-  medPriority: {
-    color: 'darkgoldenrod',
-  },
-  highPriority: {
-    color: 'red',
-  },
+const Navbar = () => {
+    return (
+        <nav className="navbar navbar-light bg-light navbar-expand-lg ml-auto">
+            <div className="container-fluid">
+                <button className="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i className="fas fa-align-justify"></i>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul className="navbar-nav ml-auto">
+                        <li>
+                            <Link to="/" className="nav-link">Log In</Link>
+                        </li>
+                        <li>
+                            <Link to="/" className="nav-link">Sign Out</Link>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    );
 };
 
-const App: React.FC = () => {
-  return (
-    <div>
-      <nav style={styles.navbar}>
-        {/* Navbar content */}
-      </nav>
-      <div style={styles.wrapper}>
-        <div style={styles.sidebar}>
-          {/* Sidebar content */}
-        </div>
-        <div id="content" style={styles.content}>
-          {/* Content */}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default App;
+export default Navbar;
