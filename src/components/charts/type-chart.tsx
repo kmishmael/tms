@@ -23,16 +23,16 @@ interface Ticket {
 }
 
 const TypeChart: React.FC = () => {
-  const [, setTickets] = useState<Ticket[]>([]);
-  const [data, setData] = useState({
-    labels: labels,
-    datasets: [
-      {
-        data: [0, 0, 0, 0],
-        backgroundColor: backgroundColor,
-      },
-    ],
-  });
+    const [tickets, setTickets] = useState<Ticket[]>([]);
+    const [data, setData] = useState({
+        labels: labels,
+        datasets: [
+            {
+                data: [0, 0, 0, 0],
+                backgroundColor: backgroundColor,
+            },
+        ],
+    });
 
   useEffect(() => {
     axios

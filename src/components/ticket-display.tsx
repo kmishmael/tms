@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import MarkButton from './mark-button';
+// import MarkButton from './mark-button';
 
 interface TicketProps {
     ticket: {
@@ -76,13 +76,13 @@ const Ticket: React.FC<TicketProps> = ({ ticket, deleteTicket }) => {
                     className="badge badge-danger">Delete</a>
                 <br />
 
-                <MarkButton
+                {/* <MarkButton>
                     mark={ticketData.status}
                     ticketID={ticket._id}
-                />
+                    </MarkButton> */}
 
-                {/* Uncomment the following lines to implement status update buttons */}
-                {/* {ticketData.status !== 'Resolved' ?
+             
+                 {ticketData.status !== 'Resolved' ?
                     <a href="#" onClick={() => {
                         setTicketData(prevData => ({ ...prevData, status: 'Resolved' }));
                     }}
@@ -91,7 +91,7 @@ const Ticket: React.FC<TicketProps> = ({ ticket, deleteTicket }) => {
                         setTicketData(prevData => ({ ...prevData, status: 'Open' }));
                     }}
                         className="badge badge-secondary">Mark as Open</a>
-                } */}
+                } 
             </td>
         </tr>
     );
