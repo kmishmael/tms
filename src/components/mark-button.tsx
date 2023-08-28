@@ -17,7 +17,6 @@ const MarkButton: React.FC<TicketProps> = ({ _id }) => {
   const [, setProjects] = useState<string[]>([]);
 
   useEffect(() => {
-    // Fetch ticket details
     axios
       .get(`http://localhost:5000/tickets/${_id}`)
       .then((res) => {
@@ -34,7 +33,6 @@ const MarkButton: React.FC<TicketProps> = ({ _id }) => {
         console.log(error);
       });
 
-    // Fetch list of users
     axios
       .get('http://localhost:5000/users/')
       .then((res) => {
@@ -46,7 +44,6 @@ const MarkButton: React.FC<TicketProps> = ({ _id }) => {
         console.log(error);
       });
 
-    // Fetch list of projects
     axios
       .get('http://localhost:5000/projects/')
       .then((res) => {

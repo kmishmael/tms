@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Bar } from "react-chartjs-2";
+import {Chart, ArcElement, CategoryScale, LinearScale, BarElement} from 'chart.js'
+
+Chart.register(ArcElement);
+Chart.register(CategoryScale);
+Chart.register(LinearScale)
+Chart.register(BarElement)
 
 const labels = ["Low", "Medium", "High"];
 

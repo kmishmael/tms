@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Doughnut } from "react-chartjs-2";
+import {Chart, ArcElement, CategoryScale, LinearScale} from 'chart.js'
+
+Chart.register(ArcElement);
+Chart.register(CategoryScale);
+Chart.register(LinearScale)
+Chart.register(ArcElement)
 
 const backgroundColor = ["aquamarine", "burlywood", "firebrick", "gray"];
 const labels = ["Bug/Error", "Feature Request", "Security", "Other"];
