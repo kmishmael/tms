@@ -1,8 +1,8 @@
 import React from 'react';
-import StatusChart from "./charts/status-chart.component";
-import PriorityChart from "./charts/priority-chart.component";
-import TypeChart from "./charts/type-chart.component";
-import TicketList from "./ticket-list.component";
+import StatusChart from "./charts/status-chart";
+import PriorityChart from "./charts/priority-chart";
+import TypeChart from "./charts/type-chart";
+import TicketList from "./ticket-list";
 
 const Dashboard: React.FC = () => {
     return (
