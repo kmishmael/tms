@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080
 
 app.use(cors());
 app.use(express.json());
@@ -33,6 +33,11 @@ app.use('/tickets', ticketsRouter);
 app.use('/users', usersRouter);
 app.use('/projects', projectsRouter);
 
-app.listen(port, () => {
-  console.log(`Server is running on port: ${port}`);
-});
+app.listen(port, (err, res) => {
+	if (err) {
+		console.log(err)
+		return res.status(500).send(err.message)
+	} else {
+		console.log('[INFO] Server Running on port:', port)
+	}
+})

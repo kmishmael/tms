@@ -30,3 +30,5 @@ Project.findByIdAndDelete(req.params.id)
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+module.exports = router;
+
