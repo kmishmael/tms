@@ -7,7 +7,14 @@ import CreateUser from "./components/create-user";
 import ManageProjects from "./components/manage-project";
 import EditTicket from "./components/edit-ticket";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import { ClerkProvider, SignIn, SignUp } from "@clerk/clerk-react";
+import {
+  ClerkProvider,
+  RedirectToSignIn,
+  SignIn,
+  SignUp,
+  SignedIn,
+  SignedOut,
+} from "@clerk/clerk-react";
 import Layout from "./components/layout";
 
 if (!process.env.REACT_APP_CLERK_PUBLISHABLE_KEY) {
@@ -25,9 +32,16 @@ function ClerkProviderWithRoutes() {
         <Route
           path="/"
           element={
-            <Layout>
-              <Dashboard />
-            </Layout>
+            <>
+              <SignedIn>
+                <Layout>
+                  <Dashboard />
+                </Layout>{" "}
+              </SignedIn>
+              <SignedOut>
+                <RedirectToSignIn />
+              </SignedOut>
+            </>
           }
         />
         <Route
@@ -42,41 +56,81 @@ function ClerkProviderWithRoutes() {
         <Route
           path="/tickets/create"
           element={
-            <Layout>
-              <CreateTicket />
-            </Layout>
+            <>
+              <SignedIn>
+                <Layout>
+                  <CreateTicket />
+                </Layout>
+              </SignedIn>
+              <SignedOut>
+                <RedirectToSignIn />
+              </SignedOut>
+            </>
           }
         />
         <Route
           path="/manage-users"
           element={
-            <Layout>
-              <ManageUsers />
-            </Layout>
+            <>
+              <SignedIn>
+                <Layout>
+                  <ManageUsers />
+                </Layout>
+              </SignedIn>
+              <SignedOut>
+                <RedirectToSignIn />
+              </SignedOut>
+            </>
           }
         />
         <Route
           path="/users/create"
           element={
-            <Layout>
-              <CreateUser />
-            </Layout>
+            <>
+              <SignedIn>
+                <Layout>
+                  <CreateUser />
+                </Layout>
+              </SignedIn>
+              <SignedOut>
+                <RedirectToSignIn />
+              </SignedOut>
+            </>
+
           }
         />
         <Route
           path="/manage-projects"
           element={
-            <Layout>
-              <ManageProjects />
-            </Layout>
+
+            <>
+              <SignedIn>
+                <Layout>
+                  <ManageProjects />
+                </Layout>
+              </SignedIn>
+              <SignedOut>
+                <RedirectToSignIn />
+              </SignedOut>
+            </>
+
           }
         />
         <Route
           path="/edit/:id"
           element={
-            <Layout>
-              <EditTicket />
-            </Layout>
+
+            <>
+              <SignedIn>
+                <Layout>
+                  <EditTicket />
+                </Layout>
+              </SignedIn>
+              <SignedOut>
+                <RedirectToSignIn />
+              </SignedOut>
+            </>
+
           }
         />
       </Routes>
