@@ -7,7 +7,6 @@ const Navbar = () => {
   return (
     <nav className="navbar flex justify-end navbar-light bg-light navbar-expand-lg ml-auto">
       <div className="ml-auto mr-16">
-        
         {isSignedIn ? (
           <SignOutButton />
         ) : (
@@ -26,7 +25,6 @@ const Navbar = () => {
             </ul>
           </div>
         )}
-
       </div>
     </nav>
   );
