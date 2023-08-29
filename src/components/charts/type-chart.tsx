@@ -29,7 +29,7 @@ interface Ticket {
 }
 
 const TypeChart: React.FC = () => {
-    const [tickets, setTickets] = useState<Ticket[]>([]);
+    const [, setTickets] = useState<Ticket[]>([]);
     const [data, setData] = useState({
         labels: labels,
         datasets: [
