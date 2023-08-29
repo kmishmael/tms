@@ -96,11 +96,13 @@ function ClerkProviderWithRoutes() {
                 <RedirectToSignIn />
               </SignedOut>
             </>
+
           }
         />
         <Route
           path="/manage-projects"
           element={
+
             <>
               <SignedIn>
                 <Layout>
@@ -111,11 +113,13 @@ function ClerkProviderWithRoutes() {
                 <RedirectToSignIn />
               </SignedOut>
             </>
+
           }
         />
         <Route
           path="/edit/:id"
           element={
+
             <>
               <SignedIn>
                 <Layout>
@@ -126,6 +130,7 @@ function ClerkProviderWithRoutes() {
                 <RedirectToSignIn />
               </SignedOut>
             </>
+
           }
         />
       </Routes>
