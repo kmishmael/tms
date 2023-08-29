@@ -23,10 +23,12 @@ mongoose.connection.once('open', () => {
 });
 
 // Get routes
+const indexRouter = require('./routes/index');
 const ticketsRouter = require('./routes/tickets');
 const usersRouter = require('./routes/users');
 const projectsRouter = require('./routes/projects');
 
+app.use('/', indexRouter);
 app.use('/tickets', ticketsRouter);
 app.use('/users', usersRouter);
 app.use('/projects', projectsRouter);
