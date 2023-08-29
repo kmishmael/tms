@@ -21,16 +21,16 @@ if (!process.env.REACT_APP_CLERK_PUBLISHABLE_KEY) {
 
 const clerkPubKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
 
-export default function App() {
+function ClerkProviderWithRoutes() {
+  const navigate = useNavigate();
 
   return (
-    <BrowserRouter>
       <ClerkProvider
         publishableKey={clerkPubKey}
         navigate={(to) => navigate(to)}
       >
         <Navbar />
-        <div className="wrapper">
+        <div className="wrapp flex w-full">
           <Sidebar />
           <div id="content">
             <Routes>
@@ -52,6 +52,13 @@ export default function App() {
           </div>
         </div>
       </ClerkProvider>
-    </BrowserRouter>
   );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+    <ClerkProviderWithRoutes />
+    </BrowserRouter>
+  )
 }

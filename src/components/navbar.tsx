@@ -18,12 +18,12 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
             <li>
-              <Link to="/" className="nav-link">
+              <Link to="/sign-in" className="nav-link">
                 Log In
               </Link>
             </li>
             <li>
-              <Link to="/" className="nav-link">
+              <Link to="/sign-up" className="nav-link">
                 Sign Out
               </Link>
             </li>
