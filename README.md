@@ -11,6 +11,8 @@ npm run dev
 
 on server folder run the same command
 
+You didn't forget to run `npm install` on both folders, right?
+
 Goodluck dealing with CORS errors
 ## Tasks
 
