@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import CreateProject from "./create-project";
 
+
 interface Project {
     _id: string;
     name: string;
@@ -28,10 +29,17 @@ const ProjectRow: React.FC<ProjectProps> = ({ project, deleteProject }) => (
 
 const ManageProjects: React.FC = () => {
     const [projects, setProjects] = useState<Project[]>([]);
-
+    const API_URL = process.env.API_URL
     const fetchProjects = async () => {
         try {
-            const response = await axios.get<Project[]>('http://localhost:5000/projects/');
+            const response = await axios.get<Project[]>(`${API_URL}/projects/`, {
+                method: 'GET',
+                headers: {
+                  'Access-Control-Allow-Origin': '*',
+                  'Content-Type': 'application/json',
+                },
+                withCredentials: true,
+              });
             setProjects(response.data);
         } catch (error) {
             console.log(error);
@@ -44,7 +52,7 @@ const ManageProjects: React.FC = () => {
 
     const deleteProject = async (id: string) => {
         try {
-            await axios.delete(`http://localhost:5000/projects/${id}`);
+            await axios.delete(`${API_URL}/projects/${id}`);
             setProjects(prevProjects => prevProjects.filter(project => project._id !== id));
         } catch (error) {
             console.log(error);

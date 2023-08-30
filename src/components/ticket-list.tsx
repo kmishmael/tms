@@ -15,9 +15,10 @@ interface Ticket {
 
 const TicketList: React.FC = () => {
     const [tickets, setTickets] = useState<Ticket[]>([]);
+    const API_URL = process.env.API_URL
 
     useEffect(() => {
-        axios.get<Ticket[]>('http://localhost:5000/tickets/')
+        axios.get<Ticket[]>(`${API_URL}/tickets/`)
             .then(res => {
                 setTickets(res.data);
             })
@@ -25,7 +26,7 @@ const TicketList: React.FC = () => {
     }, []);
 
     const deleteTicket = (id: string) => {
-        axios.delete(`http://localhost:5000/tickets/${id}`)
+        axios.delete(`${API_URL}/tickets/${id}`)
             .then(res => { console.log(res.data); });
 
         setTickets(prevTickets => prevTickets.filter(ticket => ticket._id !== id));

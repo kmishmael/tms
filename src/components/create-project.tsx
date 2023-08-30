@@ -8,9 +8,17 @@ interface Project {
 const CreateProject: React.FC = () => {
     const [_, setProjects] = useState<string[]>([]);
     const [name, setName] = useState<string>('');
+    const API_URL = process.env.API_URL;
 
     useEffect(() => {
-        axios.get<Project[]>('http://localhost:5000/projects/')
+        axios.get<Project[]>(`${API_URL}/projects/`, {
+            method: 'GET',
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+          })
             .then(res => {
                 if (res.data.length > 0) {
                     setProjects(res.data.map(project => project.name));
@@ -32,7 +40,14 @@ const CreateProject: React.FC = () => {
 
         console.log(project);
 
-        axios.post('http://localhost:5000/projects/create', project)
+        axios.post(`${API_URL}/projects/create`, project, {
+            method: 'POST',
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+          })
             .then(res => console.log(res.data));
 
         // clear form

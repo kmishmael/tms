@@ -7,15 +7,16 @@ interface SidebarProps {}
 const Sidebar: React.FC<SidebarProps> = () => {
   return (
     <nav className="col-md-2 d-none d-md-block bg-light sidebar">
-      <center>
+      {/* <center>
         <img
           src={logo}
           className="navbar-brand"
           width="120"
           alt="Tech support"
         />
-      </center>
-      <ul className="nav flex-column">
+      </center> */}
+
+      <ul className="nav flex-column mt-10">
         <li className="nav-item">
           <NavLink
             to="/"

@@ -53,10 +53,11 @@ const PriorityChart: React.FC = () => {
       },
     ],
   });
+  const API_URL = process.env.API_URL;
 
   useEffect(() => {
     axios
-      .get<Ticket[]>("http://localhost:5000/tickets/")
+      .get<Ticket[]>(`${API_URL}/tickets/`)
       .then((res) => {
         const ticketData = res.data;
         setTickets(ticketData);

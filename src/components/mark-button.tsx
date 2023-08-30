@@ -15,10 +15,11 @@ const MarkButton: React.FC<TicketProps> = ({ _id }) => {
   const [type, setType] = useState('');
   const [, setUsers] = useState<string[]>([]);
   const [, setProjects] = useState<string[]>([]);
+  const API_URL = process.env.API_URL
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/tickets/${_id}`)
+      .get(`${API_URL}/tickets/${_id}`)
       .then((res) => {
         const ticketData = res.data;
         setTitle(ticketData.title);
@@ -34,7 +35,7 @@ const MarkButton: React.FC<TicketProps> = ({ _id }) => {
       });
 
     axios
-      .get('http://localhost:5000/users/')
+      .get(`${API_URL}/users/`)
       .then((res) => {
         if (res.data.length > 0) {
           setUsers(res.data.map((user: any) => user.name));
@@ -45,7 +46,7 @@ const MarkButton: React.FC<TicketProps> = ({ _id }) => {
       });
 
     axios
-      .get('http://localhost:5000/projects/')
+      .get(`${API_URL}/projects/`)
       .then((res) => {
         if (res.data.length > 0) {
           setProjects(res.data.map((project: any) => project.name));
@@ -72,7 +73,7 @@ const MarkButton: React.FC<TicketProps> = ({ _id }) => {
     };
 
     axios
-      .post(`http://localhost:5000/tickets/update/${_id}`, updatedTicket)
+      .post(`${API_URL}/tickets/update/${_id}`, updatedTicket)
       .then((res) => console.log(res.data));
 
     alert('Successfully updated.');
