@@ -22,6 +22,7 @@ export async function POST(request: Request, { params }: any) {
 
     const ticket = await Ticket.findById(id);
 
+    if(ticket){
     ticket.title = title
     ticket.description = description
     ticket.projectName = projectName
@@ -36,7 +37,26 @@ export async function POST(request: Request, { params }: any) {
       status: "success",
       data: 'Ticket updated',
     };
-    return NextResponse.json(json_response, { status: 200 });
+    //return NextResponse.json(json_response, { status: 200 });
+    return new Response(JSON.stringify(json_response), {
+      status: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      },
+    });
+  }
+  else {
+    new Response(`Ticket with id ${id} not found`, {
+      status: 404,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      },
+    });
+  }
   } catch (e) {
     let error_response = {
       status: "fail",
