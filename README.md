@@ -1,5 +1,19 @@
 # Ticket management system
 
+This project is divided into the frontend (React) and very minimal backend (NEXTJS API - Yes it's overengineering
+ but couldn't deploy a simple express app to vercel. Come to think of it I think we should have just used NEXTJS for the whole thing)
+
+## TO RUN:
+On Base folder run (using Vite)
+```bash
+npm run dev
+```
+
+on server folder run the same command
+
+You didn't forget to run `npm install` on both folders, right?
+
+Goodluck dealing with CORS errors
 ## Tasks
 
 ### Kerama

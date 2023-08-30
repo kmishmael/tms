@@ -37,11 +37,19 @@ const UserRow: React.FC<UserProps> = ({ user, deleteUser }) => (
 
 const ManageUsers: React.FC = () => {
     const [users, setUsers] = useState<User[]>([]);
+    const API_URL = process.env.API_URL
 
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get<User[]>('http://localhost:5000/users/');
+                const response = await axios.get<User[]>(`${API_URL}/users/`, {
+                    method: 'GET',
+                    headers: {
+                      'Access-Control-Allow-Origin': '*',
+                      'Content-Type': 'application/json',
+                    },
+                    withCredentials: true,
+                  });
                 setUsers(response.data);
             } catch (error) {
                 console.log(error);
@@ -52,7 +60,7 @@ const ManageUsers: React.FC = () => {
 
     const deleteUser = async (id: string) => {
         try {
-            await axios.delete(`http://localhost:5000/users/${id}`);
+            await axios.delete(`${API_URL}/users/${id}`);
             setUsers(prevUsers => prevUsers.filter(user => user._id !== id));
         } catch (error) {
             console.log(error);

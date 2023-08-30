@@ -27,10 +27,11 @@ const Ticket: React.FC<TicketProps> = ({ ticket, deleteTicket }) => {
     status: "",
     type: "",
   });
+  const API_URL = process.env.API_URL
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/tickets/${ticket._id}`)
+      .get(`${API_URL}/tickets/${ticket._id}`)
       .then((res) => {
         setTicketData({
           title: res.data.title,

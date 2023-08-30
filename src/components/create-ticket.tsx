@@ -15,11 +15,12 @@ const CreateTicket: React.FC = () => {
   const [type, setType] = useState(types[0]);
   const [, setUsers] = useState<string[]>([]);
   const [, setProjects] = useState<string[]>([]);
+  const API_URL = process.env.API_URL;
 
   useEffect(() => {
     // Fetch users and set default assignee
     axios
-      .get("http://localhost:5000/users/")
+      .get(`${API_URL}/users/`)
       .then((res) => {
         if (res.data.length > 0) {
           setUsers(res.data.map((user: { name: string }) => user.name));
@@ -30,7 +31,7 @@ const CreateTicket: React.FC = () => {
 
     // Fetch projects and set default project name
     axios
-      .get("http://localhost:5000/projects/")
+      .get(`${API_URL}/projects`)
       .then((res) => {
         if (res.data.length > 0) {
           setProjects(
@@ -56,7 +57,7 @@ const CreateTicket: React.FC = () => {
     };
 
     axios
-      .post("http://localhost:5000/tickets/create", ticket)
+      .post(`${API_URL}/tickets/create`, ticket)
       .then((res) => console.log(res.data));
 
     alert("Successfully created.");
@@ -72,19 +73,36 @@ const CreateTicket: React.FC = () => {
   return (
     <div>
       {" "}
-      <h3>Submit a Ticket</h3>
+      <h4 className="uppercase text-normal font-medium mb-4">Submit a Ticket</h4>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Title: </label>
           <input
             type="text"
-            className="form-control"
+            className="form-control mt-1"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
+        <div className="form-group mt-4">
+          <label>Description: </label>
+          <input
+            type="text"
+            className="form-control mt-1"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </div>
+        <div className="form-group mt-4">
+          <label>Attachment (optional) </label>
+          <input
+            type="file"
+            className="form-control mt-1"
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
         {/* Other form fields... */}
-        <div className="form-group">
+        <div className="form-group mt-4">
           <input
             type="submit"
             value="Submit Ticket"

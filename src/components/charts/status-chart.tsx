@@ -24,6 +24,7 @@ const StatusChart: React.FC = () => {
         }],
         labels: labels,
     });
+    const API_URL = process.env.API_URL
 
     const updateChartData = (ticketsData: any[]) => {
         let openCount = 0;
@@ -54,7 +55,14 @@ const StatusChart: React.FC = () => {
     };
 
     useEffect(() => {
-        axios.get('http://localhost:5000/tickets/')
+        axios.get(`${API_URL}/tickets/`, {
+            method: 'GET',
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+          })
             .then((res) => {
                 setTickets(res.data);
                 updateChartData(res.data);

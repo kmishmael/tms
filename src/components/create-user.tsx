@@ -13,6 +13,7 @@ const CreateUser: React.FC = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [role, setRole] = useState(roles[0]);
+    const API_URL = process.env.API_URL
 
     const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -25,7 +26,14 @@ const CreateUser: React.FC = () => {
 
         console.log(user);
 
-        axios.post('http://localhost:5000/users/create', user)
+        axios.post(`${API_URL}/users/create`, user, {
+            method: 'POST',
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+          })
             .then(res => console.log(res.data));
 
         // Clear form

@@ -7,7 +7,7 @@ import TicketList from "./ticket-list";
 const Dashboard: React.FC = () => {
   return (
     <div>
-      <table className="table table-bordered">
+       {/* <table className="table table-bordered">
         <thead className="thead-light">
           <tr>
             <th>
@@ -34,7 +34,7 @@ const Dashboard: React.FC = () => {
             </td>
           </tr>
         </tbody>
-      </table>
+      </table>  */}
       <TicketList />
     </div>
   );

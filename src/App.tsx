@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 
-import Dashboard from "./components/edit-ticket";
+import Dashboard from "./components/create-dashboard";
 import CreateTicket from "./components/create-ticket";
 import ManageUsers from "./components/manage-users";
 import CreateUser from "./components/create-user";
