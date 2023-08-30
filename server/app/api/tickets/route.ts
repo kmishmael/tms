@@ -13,11 +13,12 @@ export async function GET(request: Request) {
       status: "success",
       data: tickets,
     };
+
     return NextResponse.json(json_response, { status: 200 });
-  } catch (e) {
+  } catch (e: any) {
     let error_response = {
       status: "fail",
-      message: e,
+      message: e.message,
     };
     return new NextResponse(JSON.stringify(error_response), {
       status: 404,

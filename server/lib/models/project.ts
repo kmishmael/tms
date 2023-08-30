@@ -8,6 +8,11 @@ const projectSchema = new Schema({
     timestamps: true,
 });
 
-const Project = mongoose.model('Project', projectSchema);
+
+if (!mongoose.models.Project) {
+    mongoose.model('Project', projectSchema);
+}
+
+const Project = mongoose.model('Project');
 
 export default Project;

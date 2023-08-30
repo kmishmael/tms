@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const ticketSchema = new Schema({
@@ -13,6 +13,9 @@ const ticketSchema = new Schema({
     timestamps: true,
 });
 
-const Ticket = mongoose.model('Ticket', ticketSchema);
+if (!mongoose.models.Ticket) {
+    mongoose.model('Ticket', ticketSchema);
+}
+const Ticket = mongoose.model('Ticket')
 
 export default Ticket;

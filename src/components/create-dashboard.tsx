@@ -3,11 +3,18 @@ import StatusChart from "./charts/status-chart";
 import PriorityChart from "./charts/priority-chart";
 import TypeChart from "./charts/type-chart";
 import TicketList from "./ticket-list";
+import { useOrganization, useOrganizationList } from "@clerk/clerk-react";
 
 const Dashboard: React.FC = () => {
+  const { isLoaded, organization, invitationList, membershipList, membership } =
+    useOrganization({
+      membershipList: {},
+    });
+
   return (
     <div>
-       {/* <table className="table table-bordered">
+
+      {/* <table className="table table-bordered">
         <thead className="thead-light">
           <tr>
             <th>

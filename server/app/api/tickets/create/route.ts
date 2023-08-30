@@ -33,7 +33,15 @@ export async function POST(request: Request) {
       status: "success",
       data: "Ticket successfully created.",
     };
-    return NextResponse.json(json_response, { status: 200 });
+    return new Response(JSON.stringify(json_response), {
+      status: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      },
+    });
+    // return NextResponse.json(json_response, { status: 200 });
   } catch (e) {
     let error_response = {
       status: "fail",

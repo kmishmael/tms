@@ -6,7 +6,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <>
       <Navbar />
       <div className="wrapp flex w-full">
-        <Sidebar />
+        {/* <Sidebar /> */}
         <div id="content">{children}</div>
       </div>
     </>

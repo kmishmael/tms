@@ -1,18 +1,35 @@
 import { SignOutButton, useUser } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo-large.png";
+import {
+  ClerkProvider,
+  SignedIn,
+  SignIn,
+  SignUp,
+  UserButton,
+} from "@clerk/clerk-react";
 
 const Navbar = () => {
   const { isSignedIn } = useUser();
 
   return (
-    <nav className="navbar flex justify-end navbar-light bg-light navbar-expand-lg ml-auto">
-      <div className="h-24 flex ml-8" style={{height: '60px'}}>
-        <img src={logo} alt="logo" />
+    <nav className="flex border h-14 items-center justify-end navbar-light ml-auto">
+      <div
+        className="h-8 flex items-center sm:ml-8 md:ml-16"
+        style={{ height: "60px" }}
+      >
+        <img src={logo} className="h-8" alt="logo" />
+      </div>
+      <div className="flex gap-6 items-center h-full ml-8 text-gray-500 text-normal">
+        <Link style={{textDecoration: 'none'}} to={'#'} className="my-auto text-gray-500 font-medium hover:text-gray-800">Dashboard</Link>
+        <Link style={{textDecoration: 'none'}} to={'#'} className="my-auto text-gray-500 font-medium hover:text-gray-800">Tickets</Link>
+        <Link style={{textDecoration: 'none'}} to={'#'} className="my-auto text-gray-500 font-medium hover:text-gray-800">Articles</Link>
       </div>
       <div className="ml-auto mr-16">
         {isSignedIn ? (
-          <SignOutButton />
+          <>
+            <UserButton />
+          </>
         ) : (
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ml-auto">
@@ -23,7 +40,7 @@ const Navbar = () => {
               </li>
               <li>
                 <Link to="/sign-up" className="nav-link">
-                  Sign Out
+                  Sign up
                 </Link>
               </li>
             </ul>
