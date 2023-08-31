@@ -65,12 +65,14 @@ function ClerkOrganizationSetter() {
         element={<SignUp routing="path" path="/sign-up" />}
       />
 
+
       <Route
         path="/tickets/create"
         element={
           <>
             <SignedIn>
               <Layout>
+
                 <CreateTicket />
               </Layout>
             </SignedIn>
