@@ -76,7 +76,6 @@ const MarkButton: React.FC<TicketProps> = ({ _id }) => {
       .post(`${API_URL}/tickets/update/${_id}`, updatedTicket)
       .then((res) => console.log(res.data));
 
-    alert('Successfully updated.');
   };
 
   return (
@@ -85,7 +84,7 @@ const MarkButton: React.FC<TicketProps> = ({ _id }) => {
         <a
           href="#"
           onClick={handleClick}
-          className="badge badge-success"
+          className=""
         >
           Mark as Resolved
         </a>
@@ -93,7 +92,7 @@ const MarkButton: React.FC<TicketProps> = ({ _id }) => {
         <a
           href="#"
           onClick={handleClick}
-          className="badge badge-secondary"
+          className=""
         >
           Mark as Open
         </a>

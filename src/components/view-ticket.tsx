@@ -8,9 +8,9 @@ const priorities: Priority[] = ["Low", "Medium", "High"];
 const statuses: Status[] = ["Open", "In Progress", "Resolved"];
 const types: Type[] = ["Bug/Error", "Feature Request", "Security", "Other"];
 
-export type Priority = "Low" | "Medium" | "High" | "Not Set";
-export type Status = "Open" | "In Progress" | "Resolved";
-export type Type = "Bug/Error" | "Feature Request" | "Security" | "Other";
+type Priority = "Low" | "Medium" | "High" | "Not Set";
+type Status = "Open" | "In Progress" | "Resolved";
+type Type = "Bug/Error" | "Feature Request" | "Security" | "Other";
 
 const CreateTicket: React.FC = () => {
   const { user } = useUser()

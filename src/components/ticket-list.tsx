@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Ticket from "./ticket-display";
 import { Link } from "react-router-dom";
+import { useOrganization, useUser } from "@clerk/clerk-react";
 
 interface Ticket {
   _id: string;
@@ -18,6 +19,19 @@ const TicketList: React.FC = () => {
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const API_URL = process.env.API_URL;
 
+  const { user, isLoaded } = useUser();
+  const {
+    isLoaded: orgloaded,
+    organization,
+    invitationList,
+    membershipList,
+    membership,
+  } = useOrganization({
+    membershipList: {},
+  });
+
+  const isAdmin = orgloaded && membership?.role == "admin";
+
   useEffect(() => {
     // fetch(`${API_URL}/tickets/`, {method: 'no-cors'})
     //   .then(async (data) => {
@@ -27,13 +41,26 @@ const TicketList: React.FC = () => {
     //     });
     //   })
     //   .catch((error) => console.log(error));
+    if (!isLoaded) return;
+
+    if (!isAdmin) {
     axios
-      .get<Ticket[]>(`${API_URL}/tickets/`)
+      .get<Ticket[]>(`${API_URL}/tickets`, {
+        params: { user: user?.id.toUpperCase() },
+      })
       .then((res) => {
         setTickets(res.data);
       })
       .catch((error) => console.log(error));
-  }, []);
+    } else {
+        axios
+      .get<Ticket[]>(`${API_URL}/tickets`)
+      .then((res) => {
+        setTickets(res.data);
+      })
+      .catch((error) => console.log(error));
+    }
+  }, [isLoaded]);
 
   const deleteTicket = (id: string) => {
     axios.delete(`${API_URL}/tickets/${id}`).then((res) => {
@@ -80,29 +107,39 @@ const TicketList: React.FC = () => {
       <br />
       <div className="flex justify-between">
         <p className="text-lg font-semibold uppercase">Tickets</p>
-        <Link to={'/tickets/create'}>
-        <button className="px-2 py-1.5 bg-blue-600 text-white rounded-md mr-8 hover:bg-blue-800">
+        <Link to={"/tickets/create"}>
+          <button className="px-2 py-1.5 bg-blue-600 text-white rounded-md mr-8 hover:bg-blue-800">
             Create ticket
-        </button>
+          </button>
         </Link>
       </div>
-      <table className="table">
-        <thead className="thead-light">
-          <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Project</th>
-            <th>Assigned To</th>
-            <th>Priority</th>
-            <th>Status</th>
-            <th>Type</th>
-            <th>Actions</th>
-          </tr>
+      <table className="table mt-6">
+        <thead className="font-normal">
+          {isAdmin ? (
+            <tr>
+              <th className="font-medium text-sm uppercase">Category</th>
+              <th className="font-medium text-sm uppercase">Title</th>
+              {/* <th className="font-medium text-sm uppercase">WHEN</th> */}
+              <th className="font-medium text-sm uppercase">Asigned To</th>
+              <th className="font-medium text-sm uppercase">Priority</th>
+              <th className="font-medium text-sm uppercase">Status</th>
+              <th className="font-medium text-sm uppercase">Actions</th>
+            </tr>
+          ) : (
+            <tr>
+              <th className="font-medium text-sm uppercase">Category</th>
+              <th className="font-medium text-sm uppercase">Title</th>
+              <th className="font-medium text-sm uppercase">WHEN</th>
+              {/* <th className="font-medium text-sm uppercase">Priority</th> */}
+              <th className="font-medium text-sm uppercase">Status</th>
+              <th className="font-medium text-sm uppercase">Actions</th>
+            </tr>
+          )}
         </thead>
         <tbody>{getOpenList()}</tbody>
       </table>
       <br />
-      {/*       
+      {/*
       <h3>Resolved Tickets</h3>
       <table className="table">
         <thead className="thead-light">

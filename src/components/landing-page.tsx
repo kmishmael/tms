@@ -73,9 +73,11 @@ const Landing: React.FC = () => {
               doubts, suggestions and issues
             </p>
 
+            <Link to={'/tickets/create'}>
             <button className="w-full p-3 uppercase font-medium text-sm bg-neutral-50 hover:bg-neutral-200 rounded-md text-red-600">
               create ticket
             </button>
+            </Link>
           </div>
 
           <div className="border w-[31%] p-4 bg-green-600 rounded-md text-center hover:-translate-y-2 transition-transform">
@@ -92,9 +94,11 @@ const Landing: React.FC = () => {
               email.
             </p>
 
+            <Link to={'/dashboard'}>
             <button className="w-full p-3 uppercase font-medium text-sm bg-neutral-50 hover:bg-neutral-200 rounded-md text-green-600">
               check ticket
             </button>
+            </Link>
           </div>
 
           <div className="border w-[31%] p-4 bg-blue-500 rounded-md text-center hover:-translate-y-2 transition-transform">
