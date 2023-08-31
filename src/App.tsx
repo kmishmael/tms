@@ -14,7 +14,6 @@ import {
   SignUp,
   SignedIn,
   SignedOut,
-  useOrganizationList,
 } from "@clerk/clerk-react";
 import Layout from "./components/layout";
 import Landing from "./components/landing-page";
@@ -71,7 +70,7 @@ function ClerkOrganizationSetter() {
           <>
             <SignedIn>
               <Layout>
-                <CreateTicket />
+                  <CreateTicket />
               </Layout>
             </SignedIn>
             <SignedOut>
