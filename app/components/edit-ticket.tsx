@@ -1,4 +1,3 @@
-/*
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ListBox } from "./create-ticket";
@@ -115,7 +114,7 @@ const EditTicket: React.FC<any> = () => {
           <label>Attachment (optional) </label>
           <input type="file" className="form-control mt-1" />
         </div>
-       
+        {/* Other form fields... */}
         <div className="form-group mt-4">
           <input
             type="submit"
@@ -129,4 +128,3 @@ const EditTicket: React.FC<any> = () => {
 };
 
 export default EditTicket;
-*/
