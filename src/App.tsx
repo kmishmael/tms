@@ -126,7 +126,7 @@ function ClerkOrganizationSetter() {
         }
       />
       <Route
-        path="/edit/:id"
+        path="/tickets/edit/:id"
         element={
           <>
             <SignedIn>
