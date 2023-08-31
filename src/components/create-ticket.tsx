@@ -3,6 +3,7 @@ import axios from "axios";
 import { Listbox, Transition } from "@headlessui/react";
 import { HiCheck, HiChevronUpDown } from "react-icons/hi2";
 import { useUser } from "@clerk/clerk-react";
+import { useNavigate } from "react-router-dom";
 
 const priorities: Priority[] = ["Low", "Medium", "High"];
 const statuses: Status[] = ["Open", "In Progress", "Resolved"];
@@ -24,6 +25,7 @@ const CreateTicket: React.FC = () => {
   const [, setUsers] = useState<string[]>([]);
   const [, setProjects] = useState<string[]>([]);
   const API_URL = process.env.API_URL;
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch users and set default assignee
@@ -67,7 +69,12 @@ const CreateTicket: React.FC = () => {
 
     axios
       .post(`${API_URL}/tickets/create`, ticket)
-      .then((res) => console.log(res.data));
+      .then((res) => {
+        
+        console.log(res.data)
+        navigate("/dashboard")
+      }
+      );
 
 
     // Clear form fields
