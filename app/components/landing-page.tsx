@@ -2,7 +2,6 @@ import React from "react";
 import { FaTicketAlt } from "react-icons/fa";
 import { BsCheck2Square } from "react-icons/bs";
 import { RiArticleLine } from "react-icons/ri";
-import Loader from "./loader";
 import { auth, useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 import { SignedIn, SignedOut } from "@clerk/nextjs";

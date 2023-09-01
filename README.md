@@ -1,19 +1,19 @@
 # Ticket management system
 
-This project is divided into the frontend (React) and very minimal backend (NEXTJS API - Yes it's overengineering
- but couldn't deploy a simple express app to vercel. Come to think of it I think we should have just used NEXTJS for the whole thing)
+This is a pseudo Ticket Management System as a Minimal Viable Product to employ cost friendly options to companies and reduce premiums payable.
+
+It runs on NEXTJS with REACT components which are rendered on the front-end.
 
 ## TO RUN:
 On Base folder run (using Vite)
 ```bash
 npm run dev
 ```
-
 on server folder run the same command
 
 You didn't forget to run `npm install` on both folders, right?
 
-Goodluck dealing with CORS errors
+
 ## Tasks
 
 ### Kerama
@@ -26,6 +26,10 @@ Goodluck dealing with CORS errors
 ### Kibet
 - Postgres sql (Supabase) - tables za tickets, authentication
 - Email - Sendgrid - Resend labs
-- api endpoints za saving tickets
+- api endpoints {saving tickets}
 - retrieving tickets
 - user based
+
+### Overview
+All the requirements set out were accomplisged but in the spirit of CI/CD.
+I think The User Interface needs a bit of polishing & Data visualisation with chartscould help but overall everything works and as a junior developer i am content.
