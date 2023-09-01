@@ -11,7 +11,7 @@ export default function Team() {
     <>
       <div className="px-8 py-12 bg-sentinel-blue">
         <p className="font-medium text-2xl mt-2 text-gray-50">
-          Meet your IT team
+          Meet IT Support On Call
         </p>
 
         <div className="w-full flex justify-between">
@@ -45,11 +45,11 @@ export default function Team() {
               imageSrc="/tovo-2.jpg" // Replace with actual image URL
             />
             <br />
-            <TeamMember
+            {/* <TeamMember
               name="Faith Mueni"
               role="Head of Projects"
               imageSrc="" // Replace with actual image URL
-            />
+            /> */}
           </div>
         </div>
       </div>

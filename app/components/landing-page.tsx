@@ -52,7 +52,7 @@ const Landing: React.FC = () => {
           <p className="text-4xl mt-5 font-normal text-sentinel-pr">
             Hello{" "}
             <span className="text-4xl font-medium italic text-sentinel-se">
-              Dear Sentinel{" "}
+              Dear customer{" "}
             </span>
             . Welcome to the IT help desk!
           </p>
