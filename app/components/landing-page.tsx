@@ -10,6 +10,7 @@ import Footer from "./footer";
 import Image from "next/image";
 import Team from "./team";
 import { FAQ } from "./faq";
+import { ActButton } from "./act-button";
 
 const Landing: React.FC = () => {
   const { userId, user } = auth();
@@ -52,7 +53,7 @@ const Landing: React.FC = () => {
           <p className="text-4xl mt-5 font-normal text-sentinel-pr">
             Hello{" "}
             <span className="text-4xl font-medium italic text-sentinel-se">
-              Dear customer{" "}
+              Welcome customer{" "}
             </span>
             . Welcome to the IT help desk!
           </p>
@@ -116,7 +117,16 @@ const Landing: React.FC = () => {
           <div className="mt-10">
             <Team />
           </div>
-          <div className="mt-10">
+
+          <div className="mt-10 flex gap-6 flex-wrap">
+            <ActButton text="incident identification" />
+            <ActButton text="incident categorization" />
+            <ActButton text="incident response" />
+            <ActButton text="incident closure" />
+            <ActButton text="incident Management best practices" />
+
+          </div>
+          <div className="mt-10 mb-10">
             <FAQ />
           </div>
         </div>
