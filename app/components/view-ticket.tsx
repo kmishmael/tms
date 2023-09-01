@@ -6,11 +6,11 @@ import { useUser } from "@clerk/clerk-react";
 
 const priorities: Priority[] = ["Low", "Medium", "High"];
 const statuses: Status[] = ["Open", "In Progress", "Resolved"];
-const types: Type[] = ["Bug/Error", "Feature Request", "Security", "Other"];
+const types: Type[] = ["Service Request", "Change Request", "Incident", "Problem"];
 
 type Priority = "Low" | "Medium" | "High" | "Not Set";
 type Status = "Open" | "In Progress" | "Resolved";
-type Type = "Bug/Error" | "Feature Request" | "Security" | "Other";
+type Type = "Service Request" | "Change Request" | "Incident" | "Problem";
 
 const CreateTicket: React.FC = () => {
   const { user } = useUser()
@@ -77,6 +77,7 @@ const CreateTicket: React.FC = () => {
     setStatus(null);
     setType(null);
   };
+
 
   return (
     <div>

@@ -5,17 +5,26 @@ import axios from "axios";
 import { Listbox, Transition } from "@headlessui/react";
 import { HiCheck, HiChevronUpDown } from "react-icons/hi2";
 import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 //import { useUser } from "@clerk/nextjs";
+import { useToast } from "@/components/ui/use-toast"
 
 const priorities: Priority[] = ["Low", "Medium", "High"];
 const statuses: Status[] = ["Open", "In Progress", "Resolved"];
-const types: Type[] = ["Bug/Error", "Feature Request", "Security", "Other"];
+const types: Type[] = [
+  "Service Request",
+  "Change Request",
+  "Incident",
+  "Problem",
+];
 
 export type Priority = "Low" | "Medium" | "High" | "Not Set";
 export type Status = "Open" | "In Progress" | "Resolved";
-export type Type = "Bug/Error" | "Feature Request" | "Security" | "Other";
+type Type = "Service Request" | "Change Request" | "Incident" | "Problem";
 
 const CreateTicket: React.FC = () => {
+  const router = useRouter();
+  const { toast } = useToast();
   //const { user } = useUser();
   const { user, isLoaded } = useUser();
   const [title, setTitle] = useState("");
@@ -31,6 +40,7 @@ const CreateTicket: React.FC = () => {
 
   useEffect(() => {
     // Fetch users and set default assignee
+
     axios
       .get(`${API_URL}/users/`)
       .then((res) => {
@@ -70,7 +80,11 @@ const CreateTicket: React.FC = () => {
 
     axios.post(`${API_URL}/tickets/create`, ticket).then((res) => {
       console.log(res.data);
-      //navigate("/dashboard");
+      toast({
+        title: 'Ticket Created Successfully',
+        description: 'Redirecting...'
+      })
+      router.push('/dashboard')
     });
 
     // Clear form fields
@@ -100,8 +114,7 @@ const CreateTicket: React.FC = () => {
             Title
           </label>
           <input
-            type="email"
-            id="email"
+            type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             aria-describedby="helper-text-explanation"
@@ -154,7 +167,7 @@ export function ListBox({ selected, setSelected, data }: any) {
     <div className="w-full mt-1">
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative mt-1">
-          <Listbox.Button className="relative border border-neutral-400 duration-100 transition-[border] focus:border-blue-500 w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+          <Listbox.Button className="relative border border-neutral-400 duration-100 transition-[border] focus:border-blue-500 min-h-[41px] w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
             <span className="block truncate">{selected}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <HiChevronUpDown
@@ -169,7 +182,7 @@ export function ListBox({ selected, setSelected, data }: any) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute mt-1 p-0 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            <Listbox.Options className="absolute z-[1000] mt-1 p-0 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
               {data.map((d: any, dIdx: any) => (
                 <Listbox.Option
                   key={dIdx}

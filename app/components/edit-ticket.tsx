@@ -1,14 +1,17 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ListBox } from "./create-ticket";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useToast } from "@/components/ui/use-toast";
+import { useOrganization } from "@clerk/nextjs";
 
 export const priorities = ["Low", "Medium", "High"];
 export const statuses = ["Open", "In Progress", "Resolved"];
 export const types = ["Bug/Error", "Feature Request", "Security", "Other"];
 
-const EditTicket: React.FC<any> = () => {
-  const { id } = useParams();
+const EditTicket: React.FC<{ id: string }> = ({ id }) => {
+  const { toast } = useToast();
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -20,6 +23,17 @@ const EditTicket: React.FC<any> = () => {
   const [users, setUsers] = useState<string[]>([]);
   const [projects, setProjects] = useState<string[]>([]);
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const {
+    isLoaded: orgloaded,
+    organization,
+    invitationList,
+    membershipList,
+    membership,
+  } = useOrganization({
+    membershipList: {},
+  });
+
+  const isAdmin = orgloaded && membership?.role == "admin";
 
   useEffect(() => {
     // Fetch ticket data and set initial state
@@ -79,8 +93,11 @@ const EditTicket: React.FC<any> = () => {
 
     axios.post(`${API_URL}/tickets/update/${id}`, ticket).then((res) => {
       console.log(res.data);
+      toast({
+        title: "Ticket Update Successful",
+        duration: 2000,
+      });
     });
-
   };
 
   return (
@@ -89,38 +106,82 @@ const EditTicket: React.FC<any> = () => {
       <p className="uppercase text-normal text-lg font-bold text-gray-700 mb-4">
         Update Ticket
       </p>
-      <form onSubmit={onSubmit}>
-        <label>Type </label>
-        <br />
-        <ListBox selected={type} setSelected={setType} data={types} />
+      <form onSubmit={onSubmit} className="w-2/5">
+        <p className="text-sm mb-2 font-medium">Type </p>
+        <div>
+          <ListBox selected={type} setSelected={setType} data={types} />
+        </div>
         <div className="form-group mt-4">
-          <label>Title </label>
+          <label
+            htmlFor="email"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Title
+          </label>
           <input
             type="text"
-            className="form-control mt-1"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            aria-describedby="helper-text-explanation"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
         </div>
+
+        {isAdmin && (
+          <>
+            <p className="text-sm mb-2 font-medium mt-4">Priority </p>
+            <div>
+              <ListBox
+                selected={priority}
+                setSelected={setPriority}
+                data={priorities}
+              />
+            </div>
+
+            <p className="text-sm mb-2 font-medium mt-4">Status </p>
+            <div>
+              <ListBox
+                selected={status}
+                setSelected={setStatus}
+                data={statuses}
+              />
+            </div>
+          </>
+        )}
+
         <div className="form-group mt-4">
-          <label>Description </label>
+          <label
+            htmlFor="message"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Description
+          </label>
           <textarea
-            className="form-control mt-1 h-20"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-          />
+            id="message"
+            rows={4}
+            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          ></textarea>
         </div>
         <div className="form-group mt-4">
-          <label>Attachment (optional) </label>
-          <input type="file" className="form-control mt-1" />
-        </div>
-        {/* Other form fields... */}
-        <div className="form-group mt-4">
+          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Upload file
+          </label>
           <input
-            type="submit"
-            value="Update Ticket"
-            className="btn btn-primary"
+            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+            aria-describedby="user_avatar_help"
+            id="user_avatar"
+            type="file"
           />
+        </div>
+        <div className="form-group mt-4">
+          <button
+            type="submit"
+            className="text-white mt-3 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Submit Ticket
+          </button>
         </div>
       </form>
     </div>

@@ -112,16 +112,17 @@ const Landing: React.FC = () => {
               </p>
             </div>
           </div>
-          <div className="mt-10">
-            <FAQ />
-          </div>
+
           <div className="mt-10">
             <Team />
           </div>
+          <div className="mt-10">
+            <FAQ />
+          </div>
         </div>
       </div>
-      {/*
-    <Footer /> */}
+  
+    <Footer />
     </main>
   );
 };
