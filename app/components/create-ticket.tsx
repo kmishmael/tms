@@ -84,6 +84,11 @@ const CreateTicket: React.FC = () => {
         title: 'Ticket Created Successfully',
         description: 'Redirecting...'
       })
+
+      axios.post(`/api/send`, {title: title, description: description, email: user?.primaryEmailAddress?.emailAddress}).then((res) => {
+       //
+       console.log(res)
+      })
       router.push('/dashboard')
     });
 
